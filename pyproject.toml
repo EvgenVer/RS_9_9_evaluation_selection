@@ -1,8 +1,14 @@
 [tool.poetry]
-name = "rs_9_9_evaluation_selection"
+name = "forest_ml"
 version = "0.1.0"
 description = ""
 authors = ["EvgenVer <evgenyveremiev88@gmail.com>"]
+packages = [{include = "forest_ml", from = "./src"}]
+
+
+
+[tool.poetry.scripts]
+eda_report = "forest_ml.eda_report:eda_report"
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -15,6 +21,12 @@ matplotlib = "^3.5.2"
 seaborn = "^0.11.2"
 argparse = "^1.4.0"
 click = "^8.1.3"
+path = "^16.4.0"
+pathlib = "^1.0.1"
+sklearn = "^0.0"
+joblib = "^1.1.0"
+pandas-profiling = "^3.2.0"
+
 
 [tool.poetry.dev-dependencies]
 flake8 = "^4.0.1"
