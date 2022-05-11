@@ -34,3 +34,4 @@ poetry run eval_perform
 poetry run mlflow ui
 ```
 
+![MLFlow experiments]('/experements.png')
