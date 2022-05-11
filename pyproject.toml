@@ -10,6 +10,7 @@ packages = [{include = "forest_ml", from = "./src"}]
 [tool.poetry.scripts]
 eda_report = "forest_ml.eda_report:eda_report"
 train = "forest_ml.train:train"
+eval_perform = "forest_ml.evaluate_performance:eval_perform"
 
 [tool.poetry.dependencies]
 python = "^3.9"

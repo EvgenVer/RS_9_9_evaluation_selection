@@ -59,6 +59,12 @@ from .pipeline import create_pipeline
     type=dict,
     show_default=True,
 )
+@click.option(
+    "--quant-transform",
+    default=False,
+    type=bool,
+    show_default=True,
+)
 
 def train(
     dataset_path: Path,
@@ -68,18 +74,20 @@ def train(
     use_scaler: bool,
     model_type: str,
     params: dict,
+    quant_transform: bool,
 ) -> None:
     features_train, features_val, target_train, target_val = get_data(
         dataset_path, random_state, test_split_ratio,
     )
     with mlflow.start_run():
-        pipeline = create_pipeline(use_scaler, model_type, random_state, params)
+        pipeline = create_pipeline(use_scaler, model_type, random_state, params, quant_transform)
         pipeline.fit(features_train, target_train)
         predict = pipeline.predict(features_val)
         accuracy = accuracy_score(target_val, predict)
         precision = precision_score(target_val, predict, average='weighted')
         recall = recall_score(target_val, predict, average='weighted')
         mlflow.log_param('use_scaler', use_scaler)
+        mlflow.log_param('quant_transfor', quant_transform)
         mlflow.log_param('model type', model_type)
         for k, v in params.items():
             mlflow.log_param(k, v)
